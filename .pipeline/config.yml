@@ -1,0 +1,156 @@
+version: 1
+branch:
+  base: main
+  pattern: '{type}/{description}'
+  types:
+    - name: feature
+      keywords: []
+    - name: bug
+      keywords:
+        - bug
+        - fix
+        - hotfix
+        - regression
+  max_slug_length: 60
+domains:
+  - api
+  - web
+commands:
+  api:
+    test: npm test
+    lint: npm run lint
+    typecheck: npm run typecheck
+    run: npm run dev
+    coverage: npm run test:coverage
+  web:
+    test: npm test
+    lint: npm run lint
+    typecheck: npm run typecheck
+    run: npm run dev
+    coverage: npm run test:coverage
+    e2e: npm run test:e2e
+models:
+  architect: opus
+  contracts: opus
+  tdd: haiku
+  lead: sonnet
+  e2e_lead: sonnet
+  ui_lead: sonnet
+  verify: haiku
+  analyst: sonnet
+  screenshot: haiku
+limits:
+  max_retries_per_failure_class: 3
+  max_total_iterations: 25
+  per_phase_timeout_minutes: 30
+  context_budget_tokens: 1500000
+security:
+  secret_scan: true
+  dep_audit: true
+  sast: false
+  block_on_high: true
+quality:
+  require_lint_clean: true
+  require_typecheck_clean: true
+  require_coverage_pct: 0
+  require_a11y_clean: true
+  require_seo_clean: false
+  require_perf_clean: false
+  perf_baseline_path: .pipeline/artifacts/perf/baseline/
+seo:
+  canonical_origin: ''
+  strict: false
+  skip_internal: true
+  lighthouse: false
+screenshot:
+  enabled: true
+  match_mode: perceptual
+  threshold_pct: 0
+  expected_source: figma
+  mockups_dir: .pipeline/artifacts/expected/
+  require_expected: false
+  viewports:
+    - name: mobile
+      width: 390
+      height: 844
+    - name: tablet
+      width: 768
+      height: 1024
+    - name: desktop
+      width: 1440
+      height: 900
+  ignore_regions: []
+  on_mismatch: loop_back
+  mobile:
+    runner: maestro
+    capture_per_flow_step: true
+finalize:
+  push_branch: false
+  create_pr: false
+  pr_draft: true
+  pr_body_includes:
+    - spec_summary
+    - acceptance_criteria
+    - test_summary
+    - decisions
+    - jira_link
+    - figma_link
+reporting:
+  batch_test_events: true
+  errors_immediate: true
+  progress_interval_seconds: 30
+stash:
+  policy: refuse
+  tag_with_ticket: true
+retry_tier_downshift:
+  enabled: true
+  failure_classes:
+    - lint_error
+    - typo
+    - format_error
+    - test_filename_mismatch
+  target_tier: haiku
+fan_out:
+  enabled: false
+  min_rows_for_fanout: 3
+  max_per_phase: 6
+  phases:
+    - tdd
+    - e2e
+plan_then_execute:
+  enabled: false
+  agents:
+    - '*-lead'
+cost_controls:
+  enabled: true
+  max_budget_usd_per_spawn: 8
+  max_turns_per_spawn: 100
+  max_thinking_tokens: 8000
+  curate_roster_by_domain: true
+  max_model_tier: opus
+  estimate_band_fraction: 0.3
+  calibration_min_samples: 20
+  pricing: null
+resource_controls:
+  enabled: true
+  cleanup_simulators: true
+  max_concurrent_spawns: 4
+  min_free_mem_warn_mb: 2048
+monitor_windowing:
+  enabled: true
+  max_windows: 30
+accessibility:
+  enabled: true
+  standards:
+    - wcag-2.2-aa
+    - section-508
+    - en-301-549
+  vpat: true
+  domains:
+    - web
+    - mobile
+    - game-mobile
+    - game-rn
+workspace:
+  sub_repos: []
+  primary_repo: ''

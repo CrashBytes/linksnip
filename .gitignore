@@ -1,0 +1,5 @@
+.pipeline/inputs/
+node_modules/
+*.sqlite
+*.db
+dist/
