@@ -1,0 +1,17 @@
+{
+  "audit_run": "RUN-20260626-135245-e0ud",
+  "timestamp": "2026-06-26T13:52:45Z",
+  "tool": "@axe-core/playwright v4.12.1",
+  "standards": ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"],
+  "url": "http://localhost:3100/",
+  "runs": [
+    { "label": "mobile-default",  "viewport": "390x844",   "state": "default", "violations": 0, "passes": "all applicable rules", "incomplete": 0 },
+    { "label": "mobile-error",    "viewport": "390x844",   "state": "error",   "violations": 0, "passes": "all applicable rules", "incomplete": 0 },
+    { "label": "tablet-default",  "viewport": "768x1024",  "state": "default", "violations": 0, "passes": "all applicable rules", "incomplete": 0 },
+    { "label": "tablet-error",    "viewport": "768x1024",  "state": "error",   "violations": 0, "passes": "all applicable rules", "incomplete": 0 },
+    { "label": "desktop-default", "viewport": "1440x900",  "state": "default", "violations": 0, "passes": "all applicable rules", "incomplete": 0 },
+    { "label": "desktop-error",   "viewport": "1440x900",  "state": "error",   "violations": 0, "passes": "all applicable rules", "incomplete": 0 }
+  ],
+  "total_axe_violations_across_all_runs": 0,
+  "notes": "axe-core ran with tags wcag2a wcag2aa wcag21a wcag21aa wcag22aa. Zero violations in all 6 runs."
+}

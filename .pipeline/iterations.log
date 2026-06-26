@@ -50,3 +50,11 @@
 {"ts":"2026-06-26T11:00:45.000Z","run_id":"RUN-20260626-135245-e0ud","phase":"ui","agent":"web-tech-lead","domain":"web","event":"progress","notes":"identified two issues: type=url blocks browser submit for invalid values; /?created= redirect breaks waitForURL('/'); rewrote web.ts with type=text + plain / redirect (3/4)"}
 {"ts":"2026-06-26T11:01:00.000Z","run_id":"RUN-20260626-135245-e0ud","phase":"ui","agent":"web-tech-lead","domain":"web","event":"test_run","command":"npm run test:e2e","outcome":"pass","notes":"51/51 Playwright tests pass; 32/32 Vitest tests pass; lint clean; typecheck clean; axe-core zero violations (4/4)"}
 {"ts":"2026-06-26T11:01:30.000Z","run_id":"RUN-20260626-135245-e0ud","phase":"ui","agent":"web-tech-lead","domain":"web","event":"agent_end","outcome":"pass","notes":"WEB-E-1..5 blue-green; files: src/routes/web.ts (created), src/app.ts (modified), eslint.config.js (modified)"}
+{"ts":"2026-06-26T15:03:12.000Z","event":"phase_exit","phase":"ui","status":"ok","e2e_blue_green":51,"vitest":32,"notes":"all 51 e2e pass; axe clean; 2 ADR deviations + dead code logged F-001..F-003; commit 8ee0871"}
+{"ts":"2026-06-26T15:03:12.000Z","event":"phase_enter","phase":"screenshot_diff","notes":"expected_source=figma but no frames; require_expected=false -> capture-only"}
+{"ts":"2026-06-26T15:05:22.000Z","event":"phase_exit","phase":"screenshot_diff","status":"ok","mode":"capture-only","captured":3,"mismatches":0}
+{"ts":"2026-06-26T15:05:22.000Z","event":"phase_enter","phase":"verify"}
+{"ts":"2026-06-26T15:13:28.000Z","event":"phase_exit","phase":"verify","status":"ok","notes":"vitest 32, e2e 51, typecheck+lint clean, secrets allow, dep_audit 0 vulns, a11y 19/19 allow; seo+coverage+sast skipped per config"}
+{"ts":"2026-06-26T15:13:28.000Z","event":"phase_enter","phase":"runtime_check"}
+{"ts":"2026-06-26T15:14:23.000Z","event":"phase_exit","phase":"runtime_check","status":"ok","notes":"all endpoints smoke-clean; redirect increments clicks; no crashes"}
+{"ts":"2026-06-26T15:14:23.000Z","event":"phase_enter","phase":"rebase"}
