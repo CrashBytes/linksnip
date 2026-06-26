@@ -1,0 +1,38 @@
+{"ts":"2026-06-26T13:53:57.000Z","event":"phase_enter","phase":"init","run_id":"RUN-20260626-135245-e0ud"}
+{"ts":"2026-06-26T13:53:57.000Z","event":"phase_exit","phase":"init","status":"ok","notes":"workspace confirmed: config.yml+STATE.md+inputs present; greenfield repo (no package.json)"}
+{"ts":"2026-06-26T13:53:57.000Z","event":"phase_enter","phase":"analyze"}
+{"ts":"2026-06-26T13:55:00.000Z","run_id":"RUN-20260626-135245-e0ud","phase":"analyze","agent":"analyst","domain":null,"event":"agent_end","outcome":"pass","duration_ms":120000,"notes":"spec frozen, 16 ACs across 2 domains (api, web), 0 open questions (5 assumptions documented inline)"}
+{"ts":"2026-06-26T13:56:21.000Z","event":"phase_exit","phase":"analyze","status":"ok","notes":"spec.md frozen, 16 ACs, 5 assumptions, domains=[api,web]"}
+{"ts":"2026-06-26T13:56:21.000Z","event":"phase_enter","phase":"contracts"}
+{"ts":"2026-06-26T14:00:20.879Z","run_id":"RUN-20260626-135245-e0ud","phase":"contracts","agent":"contracts-architect","domain":null,"event":"progress","notes":"wrote shared-types.ts+json (1/5)"}
+{"ts":"2026-06-26T14:00:20.879Z","run_id":"RUN-20260626-135245-e0ud","phase":"contracts","agent":"contracts-architect","domain":null,"event":"progress","notes":"wrote error-codes.md (2/5)"}
+{"ts":"2026-06-26T14:00:20.879Z","run_id":"RUN-20260626-135245-e0ud","phase":"contracts","agent":"contracts-architect","domain":null,"event":"progress","notes":"wrote api.openapi.yml (3/5)"}
+{"ts":"2026-06-26T14:00:20.879Z","run_id":"RUN-20260626-135245-e0ud","phase":"contracts","agent":"contracts-architect","domain":null,"event":"progress","notes":"wrote web-routes.md (4/5)"}
+{"ts":"2026-06-26T14:00:20.879Z","run_id":"RUN-20260626-135245-e0ud","phase":"contracts","agent":"contracts-architect","domain":null,"event":"progress","notes":"validators pass: redocly/ajv/tsc (5/5)"}
+{"ts":"2026-06-26T14:00:47.100Z","run_id":"RUN-20260626-135245-e0ud","phase":"contracts","agent":"contracts-architect","domain":null,"event":"agent_end","outcome":"pass","notes":"5 files, 6 shared types, 2 error codes, 4 endpoints"}
+{"ts":"2026-06-26T14:04:56.000Z","event":"phase_exit","phase":"contracts","status":"ok","notes":"contracts frozen; api-spec-linter=allow (2 low findings); validators clean"}
+{"ts":"2026-06-26T14:04:56.000Z","event":"phase_enter","phase":"architect"}
+{"ts":"2026-06-26T13:55:00Z","run_id":"RUN-20260626-135245-e0ud","phase":"architect","agent":"api-architect","domain":"api","event":"progress","notes":"ADRs 2-5 written (4/4)"}
+{"ts":"2026-06-26T13:55:30Z","run_id":"RUN-20260626-135245-e0ud","phase":"architect","agent":"api-architect","domain":"api","event":"agent_end","notes":"4 ADRs, 14 test rows planned, AC-1..10,16 covered"}
+{"ts":"2026-06-26T14:00:00Z","run_id":"RUN-20260626-135245-e0ud","phase":"architect","agent":"web-architect","domain":"web","event":"progress","notes":"read contracts + a11y (0/3)"}
+{"ts":"2026-06-26T14:05:00Z","run_id":"RUN-20260626-135245-e0ud","phase":"architect","agent":"web-architect","domain":"web","event":"progress","notes":"ADRs 006+007 appended (2/3)"}
+{"ts":"2026-06-26T14:08:00Z","run_id":"RUN-20260626-135245-e0ud","phase":"architect","agent":"web-architect","domain":"web","event":"progress","notes":"test-plan rows populated (3/3)"}
+{"ts":"2026-06-26T14:08:30Z","run_id":"RUN-20260626-135245-e0ud","phase":"architect","agent":"web-architect","domain":"web","event":"agent_end","notes":"web design complete: ADR-006/007, 4 unit + 5 e2e rows"}
+{"ts":"2026-06-26T14:12:06.000Z","event":"phase_exit","phase":"architect","status":"ok","notes":"api 4 ADRs/web 2 ADRs; 16/16 ACs in matrix; web-a11y criteria=allow"}
+{"ts":"2026-06-26T14:12:06.000Z","event":"phase_enter","phase":"tdd"}
+{"ts":"2026-06-26T14:15:00.000Z","run_id":"RUN-20260626-135245-e0ud","phase":"tdd","agent":"api-tdd","domain":"api","event":"progress","notes":"bootstrapped package.json, tsconfig, vitest, eslint (1/3)"}
+{"ts":"2026-06-26T14:15:30.000Z","run_id":"RUN-20260626-135245-e0ud","phase":"tdd","agent":"api-tdd","domain":"api","event":"progress","notes":"wrote 3 unit + 5 integration tests (2/3)"}
+{"ts":"2026-06-26T14:15:45.000Z","run_id":"RUN-20260626-135245-e0ud","phase":"tdd","agent":"api-tdd","domain":"api","event":"test_run","outcome":"fail","notes":"14 new tests, all red as expected (missing src/app, src/lib/code, src/lib/url)"}
+{"ts":"2026-06-26T14:16:00.000Z","run_id":"RUN-20260626-135245-e0ud","phase":"tdd","agent":"api-tdd","domain":"api","event":"agent_end","outcome":"pass","duration_ms":120000,"notes":"bootstrap ok (package.json, tsconfig, vitest, eslint); 14 red tests written (7 unit/integration files); all fail on missing src/ modules as expected"}
+{"ts":"2026-06-26T14:17:00.000Z","run_id":"RUN-20260626-135245-e0ud","phase":"tdd","agent":"web-tdd","domain":"web","event":"progress","notes":"wrote red tests for AC-11 (form structure) (1/4)"}
+{"ts":"2026-06-26T14:17:15.000Z","run_id":"RUN-20260626-135245-e0ud","phase":"tdd","agent":"web-tdd","domain":"web","event":"progress","notes":"wrote red tests for AC-12 (links table) (2/4)"}
+{"ts":"2026-06-26T14:17:30.000Z","run_id":"RUN-20260626-135245-e0ud","phase":"tdd","agent":"web-tdd","domain":"web","event":"progress","notes":"wrote red tests for AC-14 (error display) (3/4)"}
+{"ts":"2026-06-26T14:17:45.000Z","run_id":"RUN-20260626-135245-e0ud","phase":"tdd","agent":"web-tdd","domain":"web","event":"test_run","outcome":"fail","notes":"18 web tests written, all red (missing src/views/form.ts, src/views/linksTable.ts, src/views/page.ts)"}
+{"ts":"2026-06-26T14:18:00.000Z","run_id":"RUN-20260626-135245-e0ud","phase":"tdd","agent":"web-tdd","domain":"web","event":"agent_end","outcome":"pass","duration_ms":60000,"notes":"4 rows (WEB-U-1..4) written as red tests; test-plan updated to red; 18 web unit tests across 2 files"}
+{"ts":"2026-06-26T14:18:42.000Z","event":"phase_exit","phase":"tdd","status":"ok","red_suites":9,"notes":"api 14 + web unit reds confirmed failing on missing src/; see .pipeline/artifacts/gates/tdd-all-test.log"}
+{"ts":"2026-06-26T14:18:42.000Z","event":"phase_enter","phase":"implement","notes":"plan_then_execute off; leads sequenced (shared working tree/git index)"}
+{"ts":"2026-06-26T10:24:00.000Z","run_id":"RUN-20260626-135245-e0ud","phase":"implement","agent":"api-lead","domain":"api","event":"progress","notes":"unit tests green: code+url gen (2/14)"}
+{"ts":"2026-06-26T10:25:00.000Z","run_id":"RUN-20260626-135245-e0ud","phase":"implement","agent":"api-lead","domain":"api","event":"progress","notes":"integration tests green: all 11 api routes (14/14)"}
+{"ts":"2026-06-26T10:27:00.000Z","run_id":"RUN-20260626-135245-e0ud","phase":"implement","agent":"api-lead","domain":"api","event":"progress","notes":"lint+typecheck clean; web unit tests also green (bonus)"}
+{"ts":"2026-06-26T10:28:00.000Z","run_id":"RUN-20260626-135245-e0ud","phase":"implement","agent":"api-lead","domain":"api","event":"commit","commit_sha":"6328309","notes":"green: API-U-1, API-U-2, API-U-3, API-I-1..API-I-11"}
+{"ts":"2026-06-26T10:28:30.000Z","run_id":"RUN-20260626-135245-e0ud","phase":"implement","agent":"api-lead","domain":"api","event":"agent_end","outcome":"pass","notes":"14 reds flipped green; 1 commit; lint+typecheck clean; no regressions"}
