@@ -37,8 +37,15 @@ export default [
   {
     // Relaxed rules for test files — they were written by api-tdd and
     // cannot be edited. The `any` casts and unused imports are intentional
-    // in the test fixtures.
+    // in the test fixtures. Playwright e2e tests run in a browser context
+    // so DOM globals (document, window) must be allowed.
     files: ['tests/**/*.ts'],
+    languageOptions: {
+      globals: {
+        document: 'readonly',
+        window: 'readonly',
+      },
+    },
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': 'off',

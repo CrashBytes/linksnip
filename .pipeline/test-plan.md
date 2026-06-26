@@ -25,11 +25,11 @@ generated_by: ["api-architect", "web-architect"]  # list of agents that have wri
 | AC-9  |                            | API-I-9           |                   | planned   |
 | AC-10 |                            | API-I-10          |                   | planned   |
 | AC-16 |                            | API-I-11          |                   | planned   |
-| AC-11 | WEB-U-1                    |                   | WEB-E-1           | blue      |
-| AC-12 | WEB-U-2, WEB-U-3           |                   | WEB-E-2           | blue      |
-| AC-13 |                            |                   | WEB-E-3           | blue      |
-| AC-14 | WEB-U-4                    |                   | WEB-E-4           | blue      |
-| AC-15 |                            |                   | WEB-E-5           | blue      |
+| AC-11 | WEB-U-1                    |                   | WEB-E-1           | blue-green |
+| AC-12 | WEB-U-2, WEB-U-3           |                   | WEB-E-2           | blue-green |
+| AC-13 |                            |                   | WEB-E-3           | blue-green |
+| AC-14 | WEB-U-4                    |                   | WEB-E-4           | blue-green |
+| AC-15 |                            |                   | WEB-E-5           | blue-green |
 
 ## Test inventory
 
@@ -93,11 +93,11 @@ generated_by: ["api-architect", "web-architect"]  # list of agents that have wri
 ### e2e (web · playwright)
 | ID      | AC    | Test                                                                                                                                                           | Status | File                              |
 |---------|-------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|-----------------------------------|
-| WEB-E-1 | AC-11 | `GET /` loads (200) and shows the labeled URL form: `getByRole('textbox', { name: /url/i })` resolves to one input that is associated with a visible label, plus a submit `getByRole('button', { name: /shorten/i })` — verified at all three viewports (390/768/1440) | blue | tests/e2e/page.spec.ts            |
-| WEB-E-2 | AC-12 | `GET /` shows a semantic links table: `getByRole('table', { name: /links/i })` with column headers for short link and clicks; pre-seeded links render as rows — verified at all three viewports | blue | tests/e2e/page.spec.ts            |
-| WEB-E-3 | AC-13 | Submitting the form with a valid URL (no-JS native POST) round-trips: after submit the new short link appears as a new row in the table, with no console/page errors (PRG back to `/`) | blue | tests/e2e/shorten.spec.ts         |
-| WEB-E-4 | AC-14 | Submitting the form with an invalid URL (`not-a-url`) renders a visible `[role="alert"]` error with non-empty text; the failure is not silently swallowed (page still 200 with form + table) | blue | tests/e2e/shorten.spec.ts         |
-| WEB-E-5 | AC-15 | axe-core finds zero WCAG 2.2 AA violations on `GET /` in both the default state and the post-invalid-submission error state, at all three viewports (mobile 390x844, tablet 768x1024, desktop 1440x900); no horizontal scroll at 320px (reflow) | blue | tests/e2e/a11y.spec.ts            |
+| WEB-E-1 | AC-11 | `GET /` loads (200) and shows the labeled URL form: `getByRole('textbox', { name: /url/i })` resolves to one input that is associated with a visible label, plus a submit `getByRole('button', { name: /shorten/i })` — verified at all three viewports (390/768/1440) | blue-green | tests/e2e/page.spec.ts            |
+| WEB-E-2 | AC-12 | `GET /` shows a semantic links table: `getByRole('table', { name: /links/i })` with column headers for short link and clicks; pre-seeded links render as rows — verified at all three viewports | blue-green | tests/e2e/page.spec.ts            |
+| WEB-E-3 | AC-13 | Submitting the form with a valid URL (no-JS native POST) round-trips: after submit the new short link appears as a new row in the table, with no console/page errors (PRG back to `/`) | blue-green | tests/e2e/shorten.spec.ts         |
+| WEB-E-4 | AC-14 | Submitting the form with an invalid URL (`not-a-url`) renders a visible `[role="alert"]` error with non-empty text; the failure is not silently swallowed (page still 200 with form + table) | blue-green | tests/e2e/shorten.spec.ts         |
+| WEB-E-5 | AC-15 | axe-core finds zero WCAG 2.2 AA violations on `GET /` in both the default state and the post-invalid-submission error state, at all three viewports (mobile 390x844, tablet 768x1024, desktop 1440x900); no horizontal scroll at 320px (reflow) | blue-green | tests/e2e/a11y.spec.ts            |
 
 ## Status legend
 

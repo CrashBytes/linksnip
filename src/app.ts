@@ -1,6 +1,7 @@
 import { Hono } from 'hono';
 import { apiRouter } from './routes/api.js';
 import { redirectRouter } from './routes/redirect.js';
+import { webRouter } from './routes/web.js';
 import { ApiError } from './lib/errors.js';
 
 const honoApp = new Hono();
@@ -8,10 +9,10 @@ const honoApp = new Hono();
 // Mount API router first (ADR-003 ordering: /api/* before /:code)
 honoApp.route('/api', apiRouter);
 
-// Web router will be added here by the ui phase (GET /, POST /shorten)
-// Do NOT add /:code before that slot.
+// Web router: GET / and POST /shorten (ADR-003: after /api, before /:code catch-all)
+honoApp.route('/', webRouter);
 
-// Register /:code catch-all LAST so it never shadows /api/* (ADR-003)
+// Register /:code catch-all LAST so it never shadows /api/* or GET / (ADR-003)
 honoApp.route('/', redirectRouter);
 
 // Central error handler: maps ApiError to contract-specified envelopes (ADR-005)
