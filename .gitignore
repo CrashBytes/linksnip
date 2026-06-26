@@ -1,5 +1,11 @@
 .pipeline/inputs/
 node_modules/
-*.sqlite
-*.db
 dist/
+data/
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+test-results/
+playwright-report/
+.playwright/

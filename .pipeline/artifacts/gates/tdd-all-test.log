@@ -1,0 +1,63 @@
+
+> linksnip@0.1.0 test
+> vitest run
+
+
+ RUN  v1.6.1 /Users/blackholesoftware/repos/linksnip
+
+ ❯ tests/unit/form.view.test.ts  (0 test)
+ ❯ tests/integration/createLink.test.ts  (0 test)
+ ❯ tests/unit/url.test.ts  (0 test)
+ ❯ tests/unit/linksTable.view.test.ts  (0 test)
+ ❯ tests/integration/listLinks.test.ts  (0 test)
+ ❯ tests/unit/code.test.ts  (0 test)
+ ❯ tests/integration/persistence.test.ts  (0 test)
+ ❯ tests/integration/redirect.test.ts  (0 test)
+ ❯ tests/integration/stats.test.ts  (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 9 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/createLink.test.ts [ tests/integration/createLink.test.ts ]
+Error: Failed to load url ../../src/app (resolved id: ../../src/app) in /Users/blackholesoftware/repos/linksnip/tests/integration/createLink.test.ts. Does the file exist?
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51969:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/9]⎯
+
+ FAIL  tests/integration/listLinks.test.ts [ tests/integration/listLinks.test.ts ]
+ FAIL  tests/integration/persistence.test.ts [ tests/integration/persistence.test.ts ]
+ FAIL  tests/integration/redirect.test.ts [ tests/integration/redirect.test.ts ]
+ FAIL  tests/integration/stats.test.ts [ tests/integration/stats.test.ts ]
+Error: Failed to load url ../../src/app (resolved id: ../../src/app) in /Users/blackholesoftware/repos/linksnip/tests/integration/createLink.test.ts. Does the file exist?
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51969:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/9]⎯
+
+ FAIL  tests/unit/code.test.ts [ tests/unit/code.test.ts ]
+Error: Failed to load url ../../src/lib/code (resolved id: ../../src/lib/code) in /Users/blackholesoftware/repos/linksnip/tests/unit/code.test.ts. Does the file exist?
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51969:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/9]⎯
+
+ FAIL  tests/unit/form.view.test.ts [ tests/unit/form.view.test.ts ]
+Error: Failed to load url ../../src/views/form (resolved id: ../../src/views/form) in /Users/blackholesoftware/repos/linksnip/tests/unit/form.view.test.ts. Does the file exist?
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51969:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/9]⎯
+
+ FAIL  tests/unit/linksTable.view.test.ts [ tests/unit/linksTable.view.test.ts ]
+Error: Failed to load url ../../src/views/linksTable (resolved id: ../../src/views/linksTable) in /Users/blackholesoftware/repos/linksnip/tests/unit/linksTable.view.test.ts. Does the file exist?
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51969:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/9]⎯
+
+ FAIL  tests/unit/url.test.ts [ tests/unit/url.test.ts ]
+Error: Failed to load url ../../src/lib/url (resolved id: ../../src/lib/url) in /Users/blackholesoftware/repos/linksnip/tests/unit/url.test.ts. Does the file exist?
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51969:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/9]⎯
+
+ Test Files  9 failed (9)
+      Tests  no tests
+   Start at  10:18:17
+   Duration  157ms (transform 153ms, setup 0ms, collect 0ms, tests 0ms, environment 1ms, prepare 411ms)
+

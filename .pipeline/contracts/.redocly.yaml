@@ -1,0 +1,25 @@
+# contracts/.redocly.yaml
+# version: 1
+# owner: contracts-architect
+# spec_ref: LinkSnip URL shortener
+#
+# Redocly lint config for the LinkSnip contract surface. We start from the
+# recommended ruleset but turn off rules that contradict the FROZEN spec:
+#
+#  - security-defined: LinkSnip has NO authentication in scope (explicit
+#    non-goal in spec.md). Requiring a security scheme would be a contract lie.
+#  - operation-4xx-response: GET /api/links always returns 200 (no error path).
+#  - operation-2xx-response: GET /{code} is a 302-only redirect (no 2xx body).
+#  - no-server-example-com / no-empty-servers: the example origin is illustrative
+#    by design (A-3: real origin derives from request Host).
+#
+# Everything else stays at recommended strictness, so structural/$ref errors
+# still fail the lint.
+extends:
+  - recommended
+rules:
+  security-defined: off
+  operation-4xx-response: off
+  operation-2xx-response: off
+  no-server-example.com: off
+  no-empty-servers: off

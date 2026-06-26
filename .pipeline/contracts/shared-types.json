@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$comment": "contracts/shared-types.json | version: 1 | owner: contracts-architect | spec_ref: LinkSnip URL shortener (AC-1..AC-16). JSON Schema mirror of shared-types.ts. Every example in `examples` MUST validate against its own schema.",
+  "definitions": {
+    "LinkCode": {
+      "type": "string",
+      "description": "System-generated short code; URL-safe alphanumeric, non-empty. Length/charset detail left to api-architect (A-1).",
+      "pattern": "^[A-Za-z0-9]+$",
+      "minLength": 1,
+      "examples": ["aB3xK9", "Qz7Lp2"]
+    },
+    "AbsoluteUrl": {
+      "type": "string",
+      "description": "Absolute http/https URL, validated with the WHATWG URL parser; non-http(s) schemes rejected.",
+      "format": "uri",
+      "pattern": "^https?://",
+      "examples": [
+        "https://example.com/some/very/long/path?with=query",
+        "http://localhost:3000/aB3xK9"
+      ]
+    },
+    "Link": {
+      "type": "object",
+      "description": "Canonical link record exposed by the API.",
+      "additionalProperties": false,
+      "required": ["code", "url", "clicks"],
+      "properties": {
+        "code": { "$ref": "#/definitions/LinkCode" },
+        "url": { "$ref": "#/definitions/AbsoluteUrl" },
+        "clicks": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Non-negative redirect count."
+        }
+      },
+      "examples": [
+        { "code": "aB3xK9", "url": "https://example.com/some/very/long/path?with=query", "clicks": 42 }
+      ]
+    },
+    "LinkStats": {
+      "$ref": "#/definitions/Link",
+      "description": "Stats for a single link; identical shape to Link.",
+      "examples": [
+        { "code": "aB3xK9", "url": "https://example.com/some/very/long/path?with=query", "clicks": 43 }
+      ]
+    },
+    "CreateLinkRequest": {
+      "type": "object",
+      "description": "Request body for POST /api/links.",
+      "additionalProperties": false,
+      "required": ["url"],
+      "properties": {
+        "url": { "$ref": "#/definitions/AbsoluteUrl" }
+      },
+      "examples": [
+        { "url": "https://example.com/some/very/long/path?with=query" }
+      ]
+    },
+    "CreateLinkResponse": {
+      "type": "object",
+      "description": "201 response body for POST /api/links. shortUrl origin derives from request Host (A-3); a new code is minted per call even for duplicate URLs (A-4).",
+      "additionalProperties": false,
+      "required": ["code", "shortUrl"],
+      "properties": {
+        "code": { "$ref": "#/definitions/LinkCode" },
+        "shortUrl": { "$ref": "#/definitions/AbsoluteUrl" }
+      },
+      "examples": [
+        { "code": "aB3xK9", "shortUrl": "http://localhost:3000/aB3xK9" }
+      ]
+    },
+    "ApiErrorCode": {
+      "type": "string",
+      "description": "Closed set of stable error codes; keep in sync with error-codes.md.",
+      "enum": ["INVALID_URL", "LINK_NOT_FOUND"],
+      "examples": ["INVALID_URL", "LINK_NOT_FOUND"]
+    },
+    "ApiError": {
+      "type": "object",
+      "description": "Canonical error envelope for every non-2xx/3xx API response.",
+      "additionalProperties": false,
+      "required": ["error"],
+      "properties": {
+        "error": { "$ref": "#/definitions/ApiErrorCode" },
+        "message": {
+          "type": "string",
+          "description": "Optional human-readable detail; do not parse."
+        }
+      },
+      "examples": [
+        { "error": "INVALID_URL", "message": "url must be an absolute http or https URL" },
+        { "error": "LINK_NOT_FOUND", "message": "no link exists for code 'zzzzzz'" }
+      ]
+    }
+  }
+}
