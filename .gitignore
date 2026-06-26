@@ -6,3 +6,6 @@ data/
 *.db-wal
 *.db-shm
 *.sqlite
+test-results/
+playwright-report/
+.playwright/
