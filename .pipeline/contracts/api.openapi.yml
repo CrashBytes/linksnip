@@ -1,0 +1,168 @@
+# contracts/api.openapi.yml
+# version: 1
+# owner: contracts-architect
+# spec_ref: LinkSnip URL shortener (AC-1..AC-10)
+openapi: 3.1.0
+info:
+  title: LinkSnip API
+  version: "1"
+  description: >
+    HTTP surface for LinkSnip, a minimal URL shortener served by a single Hono
+    process. Covers the four routes from spec.md: three JSON endpoints under
+    /api plus the top-level redirect route GET /{code}. There is no auth, rate
+    limiting, or pagination in scope. Short-code generation is an api-architect
+    detail (A-1); shortUrl origin derives from the request Host (A-3); each POST
+    mints a new code even for duplicate URLs (A-4).
+servers:
+  - url: http://localhost:3000
+    description: Local dev server (origin is illustrative; actual origin derives from request Host per A-3).
+tags:
+  - name: links
+    description: JSON API for creating and inspecting links.
+  - name: redirect
+    description: Public short-link redirect (not under /api).
+paths:
+  /api/links:
+    post:
+      operationId: createLink
+      tags: [links]
+      summary: Create a short link for an absolute http/https URL.
+      description: >
+        Validates the URL (WHATWG parse + http/https scheme check), generates a
+        unique code, persists it, and returns 201. A new code is always minted,
+        even if the same URL was shortened before (A-4).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ./shared-types.json#/definitions/CreateLinkRequest
+            examples:
+              valid:
+                summary: A valid absolute https URL
+                value:
+                  url: "https://example.com/some/very/long/path?with=query"
+      responses:
+        "201":
+          description: Link created. Body contains the new code and the full short URL.
+          content:
+            application/json:
+              schema:
+                $ref: ./shared-types.json#/definitions/CreateLinkResponse
+              examples:
+                created:
+                  summary: Newly created short link
+                  value:
+                    code: "aB3xK9"
+                    shortUrl: "http://localhost:3000/aB3xK9"
+        "400":
+          $ref: "#/components/responses/InvalidUrl"
+    get:
+      operationId: listLinks
+      tags: [links]
+      summary: List all links with their current click counts.
+      description: Returns every link in a single response (no pagination in scope).
+      responses:
+        "200":
+          description: Array of all links.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./shared-types.json#/definitions/Link
+              examples:
+                twoLinks:
+                  summary: Two existing links
+                  value:
+                    - code: "aB3xK9"
+                      url: "https://example.com/some/very/long/path?with=query"
+                      clicks: 42
+                    - code: "Qz7Lp2"
+                      url: "https://news.example.org/article/2026/launch"
+                      clicks: 0
+                empty:
+                  summary: No links yet
+                  value: []
+  /api/links/{code}/stats:
+    get:
+      operationId: getLinkStats
+      tags: [links]
+      summary: Get stats for a single link by code.
+      parameters:
+        - $ref: "#/components/parameters/CodePath"
+      responses:
+        "200":
+          description: Stats for the requested link.
+          content:
+            application/json:
+              schema:
+                $ref: ./shared-types.json#/definitions/LinkStats
+              examples:
+                stats:
+                  summary: Stats for an existing link
+                  value:
+                    code: "aB3xK9"
+                    url: "https://example.com/some/very/long/path?with=query"
+                    clicks: 43
+        "404":
+          $ref: "#/components/responses/LinkNotFound"
+  /{code}:
+    get:
+      operationId: redirectToTarget
+      tags: [redirect]
+      summary: Redirect a short code to its original URL.
+      description: >
+        Looks up the link, increments its click count synchronously (A-2), then
+        issues a 302 to the original URL via the Location header. No response
+        body on success. Returns 404 for an unknown code. NOTE: this route is at
+        the top level, not under /api.
+      parameters:
+        - $ref: "#/components/parameters/CodePath"
+      responses:
+        "302":
+          description: Found. Redirects to the original URL. No body.
+          headers:
+            Location:
+              description: The original absolute http/https URL to redirect to.
+              required: true
+              schema:
+                $ref: ./shared-types.json#/definitions/AbsoluteUrl
+              example: "https://example.com/some/very/long/path?with=query"
+        "404":
+          $ref: "#/components/responses/LinkNotFound"
+components:
+  parameters:
+    CodePath:
+      name: code
+      in: path
+      required: true
+      description: The short code identifying the link.
+      schema:
+        $ref: ./shared-types.json#/definitions/LinkCode
+      example: "aB3xK9"
+  responses:
+    InvalidUrl:
+      description: The submitted url is missing, empty, or not a valid absolute http/https URL.
+      content:
+        application/json:
+          schema:
+            $ref: ./shared-types.json#/definitions/ApiError
+          examples:
+            invalidUrl:
+              summary: Bare word, no scheme
+              value:
+                error: "INVALID_URL"
+                message: "url must be an absolute http or https URL"
+    LinkNotFound:
+      description: No link exists for the requested code.
+      content:
+        application/json:
+          schema:
+            $ref: ./shared-types.json#/definitions/ApiError
+          examples:
+            notFound:
+              summary: Unknown code
+              value:
+                error: "LINK_NOT_FOUND"
+                message: "no link exists for code 'zzzzzz'"
