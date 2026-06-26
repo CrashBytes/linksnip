@@ -58,3 +58,7 @@
 {"ts":"2026-06-26T15:13:28.000Z","event":"phase_enter","phase":"runtime_check"}
 {"ts":"2026-06-26T15:14:23.000Z","event":"phase_exit","phase":"runtime_check","status":"ok","notes":"all endpoints smoke-clean; redirect increments clicks; no crashes"}
 {"ts":"2026-06-26T15:14:23.000Z","event":"phase_enter","phase":"rebase"}
+{"ts":"2026-06-26T15:15:30.000Z","event":"phase_exit","phase":"rebase","status":"ok","notes":"clean; zero delta (origin/main at base c6b8b45); no conflict"}
+{"ts":"2026-06-26T15:15:30.000Z","event":"phase_enter","phase":"verify","notes":"post-rebase re-verify (no-op rebase)"}
+{"ts":"2026-06-26T15:16:06.000Z","event":"phase_exit","phase":"verify","status":"ok","notes":"post-rebase: 32 vitest, 51 e2e, typecheck+lint clean; secrets/a11y carry over (byte-identical tree)"}
+{"ts":"2026-06-26T15:16:06.000Z","event":"phase_enter","phase":"finalize","notes":"push=true, pr=true(draft)"}
